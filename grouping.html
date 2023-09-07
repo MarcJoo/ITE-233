@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: #679289;
+            color: white;
+        }
+        .content{
+            margin: 50px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .con1, .con2{
+            width: 400px;
+            height: 500px;
+            border:5px dashed #EE2E31;
+            padding: 100px 20px 20px 20px;
+        }
+       
+		#droptarget {
+			float: center;
+			width: 300px;
+			height: 50px;
+			margin: 20px;
+			margin-top: 30px;
+			padding: 5px;
+			border: 6px solid #EE2E31;
+		}
+        .droptarget {
+            float: center;
+            width: 300px;
+            height: 50px;
+            margin: 20px;
+            padding: 5px;
+            border: 6px solid #EE2E31;
+        }
+	</style>
+</head>
+
+<body>
+        <div class="content">
+            <!-- ondagover -->
+            <div class="con1">
+            <h2>
+                HTML DOM ondragOver Event
+            </h2>
+            <p ondragstart="dragStartEles(event)"
+            draggable="true" id="dragtargets">
+                Draggable elementsssss
+            </p>
+            <div id="droptarget"
+                ondrop="dropEles(event)"
+                ondragover="allowDropEles(event)">
+            </div>
+            <p id="tries"></p>
+            </div>
+
+
+
+
+
+            <!-- ondragend -->
+            <div class="con2">
+                <h2>HTML DOM ondragEnd Event</h2>
+                <div class="droptarget"
+                    ondrop="Eledrop(event)"
+                    ondragover="EleallowDrop(event)">
+                
+                    <p ondragstart="EledragStart(event)"
+                    ondragend="EledragEnd(event)"
+                    draggable="true" id="dragtarget">
+                        Draggable element
+                    </p>
+                </div>
+        
+                <div class="droptarget"
+                    ondrop="Eledrop(event)"
+                    ondragover="EleallowDrop(event)">
+                </div>
+                <p id="demo"></p>
+            </div>
+        </div>
+	<script>
+		function dragStartEles(event) {
+			event.dataTransfer.setData(
+				"Text", event.target.id);
+		}
+
+		function allowDropEles(event) {
+			event.preventDefault();
+			document.getElementById(
+				"tries").innerHTML =
+				"Element is over the dropzone";
+			event.target.style.border = "6px dotted #EE2E31";
+		}
+
+		function dropEles(event) {
+			event.preventDefault();
+		let data =
+				event.dataTransfer.getData("Text");
+			event.target.appendChild(
+				document.getElementById(data));
+			document.getElementById(
+				"tries").innerHTML = "Dragging finished";
+		}
+
+
+
+
+        function EledragStart(event) {
+            event.dataTransfer.setData(
+                "Text", event.target.id);
+            document.getElementById(
+                "demo").innerHTML =
+                 "Dragging Started";
+        }
+
+        function EledragEnd(event) {
+            document.getElementById(
+                "demo").innerHTML =
+                "Dragging Finished";
+        }
+
+        function EleallowDrop(event) {
+            event.preventDefault();
+        }
+
+        function Eledrop(event) {
+            event.preventDefault();
+            let data =
+                event.dataTransfer.getData("Text");
+            event.target.appendChild(
+                document.getElementById(data));
+        }
+	</script>
+
+</body>
+
+</html>
